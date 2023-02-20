@@ -13,11 +13,11 @@ public class DBConnection {
     private static final String  databaseName = ";databaseName=PayStation";
     
     private static String  userName = ";user=sa";
-    private static String password = ";password=ditegetpassword";
+    private static String password = ";password=secret2023";
     private static String encryption = ";encrypt=false";
    
     private DatabaseMetaData dma;
-    private static Connection con;
+    private static Connection con; 
     
     // an instance of the class is generated
     private static DBConnection  instance = null;
