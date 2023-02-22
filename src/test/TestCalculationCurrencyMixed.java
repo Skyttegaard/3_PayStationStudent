@@ -9,7 +9,7 @@ import controllayer.*;
 import modellayer.*;
 
 /**
- * Inspired by the book: Flexible, Reliable Software Henrik Bærbak Christensen:
+ * Inspired by the book: Flexible, Reliable Software Henrik Bï¿½rbak Christensen:
  * Flexible, Reliable Software. Taylor and Francis Group, LLC 2010
  */
 
@@ -24,16 +24,24 @@ public class TestCalculationCurrencyMixed {
 	}
 
 	/**
-	 * Entering 1 cent and 50 øre should make the display report 4 minutes parking time.
+	 * Entering 1 cent and 50 ï¿½re should make the display report 4 minutes parking time.
 	 */
 	@Test
-	public void shouldDisplay4MinFor1CentAnd1Ore() throws IllegalCoinException {
+	public void shouldDisplay4MinFor1CentAnd50Ore() throws IllegalCoinException {
 		// Arrange
-		
+		int expectedParkingTime = 4;
+		int euroValue = 1;
+		int dkkValue = 50;
+		Currency.ValidCurrency euroCurrency = Currency.ValidCurrency.EURO;
+		Currency.ValidCoinType euroType = Currency.ValidCoinType.FRACTION;
+		Currency.ValidCoinType dkkType = Currency.ValidCoinType.FRACTION;
+		Currency.ValidCurrency dkkCurrency = Currency.ValidCurrency.DKK;
 		// Act
-
+		ps.addPayment(dkkValue, dkkCurrency, dkkType);
+		ps.addPayment(euroValue, euroCurrency, euroType);
 		// Assert
-		assertEquals(0, 1, "Dummy");		
+		assertEquals(expectedParkingTime, ps.readDisplay(), "Should display 4 min for 1 cent and 50 Ã¸re");		
+
 	}
 
 	

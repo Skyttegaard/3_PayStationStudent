@@ -102,9 +102,9 @@ public class TestDatabaseAccess {
 
 		// Arrange
 		PPrice foundPrice = null;
-		int pZoneId = 2;
+		int pZoneId = 1;
 		ControlPrice cpPrice = new ControlPrice();
-		int expectedPrice = 25;
+		int expectedPrice = 35;
 		
 		// Act
 		foundPrice = cpPrice.getPriceRemote(pZoneId);

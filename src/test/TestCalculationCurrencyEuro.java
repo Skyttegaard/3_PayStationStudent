@@ -9,7 +9,7 @@ import controllayer.*;
 import modellayer.*;
 
 /**
- * Inspired by the book: Flexible, Reliable Software Henrik Bærbak Christensen:
+ * Inspired by the book: Flexible, Reliable Software Henrik Bï¿½rbak Christensen:
  * Flexible, Reliable Software. Taylor and Francis Group, LLC 2010
  */
 
@@ -45,15 +45,18 @@ public class TestCalculationCurrencyEuro {
 	@Test
 	public void shouldDisplay2MinFor5Cents() throws IllegalCoinException {
 		
-//		// Arrange
-//		int expectedParkingTime = 2;	// In minutes		
-//		int coinValue = 5;
-//		Currency.ValidCurrency coinCurrency = Currency.ValidCurrency.EURO;
-//		Currency.ValidCoinType coinType = Currency.ValidCoinType.FRACTION;
+		// Arrange
+		int expectedParkingTime = 2;	// In minutes		
+		int coinValue = 5;
+		Currency.ValidCurrency coinCurrency = Currency.ValidCurrency.EURO;
+		Currency.ValidCoinType coinType = Currency.ValidCoinType.FRACTION;
+		
 		
 		// Act
+		ps.addPayment(coinValue, coinCurrency, coinType);
 		
-		// Assert
+		//Assert
+		assertEquals(expectedParkingTime,ps.readDisplay(), "Should display 2 minutes for 5 cents");
 
 	}
 
