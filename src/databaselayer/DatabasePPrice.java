@@ -1,6 +1,7 @@
 package databaselayer;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Calendar;
 import java.sql.SQLException;
@@ -28,17 +29,24 @@ public class DatabasePPrice implements IDbPPrice {
 		System.out.println(baseSelect);
 	
 		//ResultSet rs = null; 
-		int price, pZoneId;
+		int price = 0, pZoneId = 0;
 		PZone pZone; 
 		try {
 			Statement stmt = con.createStatement();
 			stmt.setQueryTimeout(5);
 			// Todo: Get PPrice object
-			// ResultSet rs = stmt.executeQuery(baseSelect);
+			ResultSet rs = stmt.executeQuery(baseSelect);
 			/*
 			 * Insert code 
 			 */
+			pZone = new PZone();
+			if(rs.next()) {
+				price = rs.getInt(1);
+				pZoneId = rs.getInt(2);
+			}
 			stmt.close();
+			pZone.setpZoneId(pZoneId);
+			foundPrice = new PPrice(price,pZone, 7.5);
 		} catch (SQLException ex) {
 			foundPrice = null;
 			DatabaseLayerException dle = new DatabaseLayerException("Error retrieving data");

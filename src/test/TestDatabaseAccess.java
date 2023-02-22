@@ -23,7 +23,7 @@ import controllayer.*;
 //import static org.junit.Assert.*;
 
 /**
- * Inspired by the book: Flexible, Reliable Software Henrik Bærbak Christensen:
+ * Inspired by the book: Flexible, Reliable Software Henrik Bï¿½rbak Christensen:
  * Flexible, Reliable Software. Taylor and Francis Group, LLC 2010
  */
 
@@ -79,31 +79,36 @@ public class TestDatabaseAccess {
 	
 	
 	@Test
-	public void wasRetrievedPriceDatabaselayer() {
+	public void wasRetrievedPriceDatabaselayer() throws DatabaseLayerException {
 		// Arrange
 		PPrice foundPrice = null;
 		int pZoneId = 2;
 		DatabasePPrice dbPrice = new DatabasePPrice();
+		int expectedPrice = 25;
 
 		
 		// Act
+		foundPrice = dbPrice.getPriceByZoneId(pZoneId);
 
 		// Assert
-		assertEquals(0, 1, "Dummy");
+		assertEquals(expectedPrice, foundPrice.getParkingPrice(), "Price should be equal");
 		
 	}
 	
 	
 	@Test
-	public void wasRetrievedPriceControllayer() {
+	public void wasRetrievedPriceControllayer() throws DatabaseLayerException {
 
 		// Arrange
-
+		PPrice foundPrice = null;
+		int pZoneId = 2;
+		ControlPrice cpPrice = new ControlPrice();
+		int expectedPrice = 25;
 		
 		// Act
-
+		foundPrice = cpPrice.getPriceRemote(pZoneId);
 		// Assert
-		assertEquals(0, 1, "Dummy");
+		assertEquals(expectedPrice, foundPrice.getParkingPrice(), "Price should be equal");
 		
 	}	
 	
