@@ -10,7 +10,7 @@ import controllayer.*;
 import modellayer.Currency;
 
 /**
- * Inspired by the book: Flexible, Reliable Software Henrik Bærbak Christensen:
+ * Inspired by the book: Flexible, Reliable Software Henrik Bï¿½rbak Christensen:
  * Flexible, Reliable Software. Taylor and Francis Group, LLC 2010
  */
 
@@ -23,9 +23,21 @@ public class TestCalculationCurrencyDkk {
 	public static void setUp() {
 		ps = new ControlPayStation();
 	}
+	@Test
+	public void shouldDisplay0() throws IllegalCoinException {
+		
+		// Arrange
+		int expectedParkingTime = 0;
+		
+		// Act
+		// No action
+		
+		// Assert
+		assertEquals(expectedParkingTime, ps.readDisplay(), "Should display 0 min for no coins");
+	}
 
 	/**
-	 * Entering 50 øre should make the display report 3 minutes parking time.
+	 * Entering 50 ï¿½re should make the display report 3 minutes parking time.
 	 */
 	@Test
 	public void shouldDisplay3MinFor50Ore() throws IllegalCoinException {
@@ -40,14 +52,34 @@ public class TestCalculationCurrencyDkk {
 		ps.addPayment(coinValue, coinCurrency, coinType);
 			
 		// Assert
-		assertEquals(expectedParkingTime, ps.readDisplay(), "Should display 3 min for 50 øre");
+		assertEquals(expectedParkingTime, ps.readDisplay(), "Should display 3 min for 50 ï¿½re");
+	}
+	
+	/**
+	 * Entering 1 krone should make the display report 6 minutes parking time.
+	 * @throws IllegalCoinException
+	 */
+	@Test
+	public void shouldDisplay6MinFor1Krone() throws IllegalCoinException {
+		
+		// Arrange
+		int expectedParkingTime = 6;	// In minutes
+		int coinValue = 1;
+		Currency.ValidCurrency coinCurrency = Currency.ValidCurrency.DKK;
+		Currency.ValidCoinType coinType = Currency.ValidCoinType.INTEGER;
+		
+		// Act
+		ps.addPayment(coinValue, coinCurrency, coinType);
+			
+		// Assert
+		assertEquals(expectedParkingTime, ps.readDisplay(), "Should display 6 min for 1 krone");
 	}
 
 
 
 	/** Fixture for pay station testing. */
-	@AfterAll
-	public static void cleanUp() {
+	@AfterEach
+	public void cleanUp() {
 		ps.setReady();
 	}	
 	

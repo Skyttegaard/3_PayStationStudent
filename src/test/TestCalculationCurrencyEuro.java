@@ -59,6 +59,33 @@ public class TestCalculationCurrencyEuro {
 		assertEquals(expectedParkingTime,ps.readDisplay(), "Should display 2 minutes for 5 cents");
 
 	}
+	
+	/**
+	 * Entering 1 euro should make the display report 40 minutes parking time
+	 * @throws IllegalCoinException
+	 */
+	@Test
+	public void shouldDisplay40minFor1Euro() throws IllegalCoinException{
+		// Arrange
+		int expectedParkingTime = 40;
+		int coinValue = 1;
+		Currency.ValidCurrency coinCurrency = Currency.ValidCurrency.EURO;
+		Currency.ValidCoinType coinType = Currency.ValidCoinType.INTEGER;
+		
+		// Act
+		ps.addPayment(coinValue, coinCurrency, coinType);
+		
+		//Assert
+		assertEquals(expectedParkingTime,ps.readDisplay(), "Should display 40 minutes for 1 euro");
+	}
+	
+	/**
+	 * Cleans up the paystation after each test.
+	 */
+	@AfterEach
+	public void cleanUp() {
+		ps.setReady();
+	}
 
 	
 }

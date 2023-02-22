@@ -44,10 +44,30 @@ public class TestCalculationCurrencyMixed {
 
 	}
 
+	/**
+	 * Entering 1 euro and 1 norwegian krone should make the display report 40 minutes parking time
+	 */
+	@Test
+	public void shouldDisplay40MinFor1EuroAnd1Nok() throws IllegalCoinException{
+		//Arrange
+		int expectedParkingTime = 40;
+		int euroValue = 1;
+		int nokValue = 1;
+		Currency.ValidCurrency euroCurrency = Currency.ValidCurrency.EURO;
+		Currency.ValidCoinType euroType = Currency.ValidCoinType.INTEGER;
+		Currency.ValidCurrency nokCurrency = Currency.ValidCurrency.NOK;
+		Currency.ValidCoinType nokType = Currency.ValidCoinType.INTEGER;
+		// Act
+		ps.addPayment(nokValue, nokCurrency, nokType);
+		ps.addPayment(euroValue, euroCurrency, euroType);
+		
+		//Assert
+		assertEquals(expectedParkingTime, ps.readDisplay(), "Should display 40 min for 1 euro and 1 norwegian krone");
+	}
 	
 	/** Fixture for pay station testing. */
-	@AfterAll
-	public static void cleanUp() {
+	@AfterEach
+	public void cleanUp() {
 		ps.setReady();
 	}
 	
