@@ -54,7 +54,7 @@ public class TestDatabaseAccess {
 	
 	
 	@Test
-	public void wasInsertedBuy() {
+	public void wasInsertedBuy() throws DatabaseLayerException {
 		
 		// Arrange
 		LocalDate timeNow = java.time.LocalDate.now();
@@ -66,14 +66,15 @@ public class TestDatabaseAccess {
 		pStat.setAmount(payedCentAmount);
 		tempPBuy.setAssociatedPaystation(pStat);
 		tempPBuy.setBuyTime(timeNow);
-		
+
 		DatabasePBuy dbPbuy = new DatabasePBuy();
 		
 		// Act
-		int key = 0; //TODO: Call dbPbuy
+		int key = dbPbuy.insertParkingBuy(tempPBuy);
+		
 		
 		// Assert
-		assertEquals("Dummy", key > 0);
+		assertTrue(key > 0);
 		
 	}	
 	
